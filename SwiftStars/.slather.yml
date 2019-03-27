@@ -1,0 +1,6 @@
+coverage_service: cobertura_xml
+workspace: ./SwiftStars.xcworkspace
+xcodeproj: ./SwiftStars.xcodeproj
+scheme: SwiftStars
+output_directory: ./SlatherOutput
+input_format: profdata

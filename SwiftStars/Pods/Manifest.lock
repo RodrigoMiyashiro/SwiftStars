@@ -1,0 +1,34 @@
+PODS:
+  - iOSSnapshotTestCase (4.0.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 4.0.0)
+  - iOSSnapshotTestCase/Core (4.0.0)
+  - iOSSnapshotTestCase/SwiftSupport (4.0.0):
+    - iOSSnapshotTestCase/Core
+  - KIF (3.7.4):
+    - KIF/Core (= 3.7.4)
+  - KIF/Core (3.7.4)
+  - Nimble (7.3.1)
+  - Quick (1.3.2)
+
+DEPENDENCIES:
+  - iOSSnapshotTestCase (~> 4.0.0)
+  - KIF
+  - Nimble (~> 7.3.1)
+  - Quick (~> 1.3.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - iOSSnapshotTestCase
+    - KIF
+    - Nimble
+    - Quick
+
+SPEC CHECKSUMS:
+  iOSSnapshotTestCase: 711379b19f69a22c131527df862352c877c2773c
+  KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
+  Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
+  Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+
+PODFILE CHECKSUM: 9fa8234da18b3976b4e59555092c69b1ee7d257c
+
+COCOAPODS: 1.5.3

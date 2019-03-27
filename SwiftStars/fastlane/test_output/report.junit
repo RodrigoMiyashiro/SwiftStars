@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='SwiftStarsUITests.xctest' tests='3' failures='0'>
+  <testsuite name='SwiftStarsTests.SwiftStarsTests' tests='2' failures='0'>
+    <testcase classname='SwiftStarsTests.SwiftStarsTests' name='testExample' time='0.001'/>
+    <testcase classname='SwiftStarsTests.SwiftStarsTests' name='testPerformanceExample' time='0.282'/>
+  </testsuite>
+  <testsuite name='SwiftStarsUITests.SwiftStarsUITests' tests='1' failures='0'>
+    <testcase classname='SwiftStarsUITests.SwiftStarsUITests' name='testExample' time='5.012'/>
+  </testsuite>
+</testsuites>
