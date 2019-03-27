@@ -35,15 +35,15 @@ Algumas melhorias para fazer na próxima versão do app:<br>
 
 ## Recursos
 
-API Github
+API Github<br>
 https://developer.github.com/v3/
 
 https://api.github.com/search/repositories?q=language:swift&sort=stars
 
 ## Referências
 
-herbertograca - DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together
+herbertograca - DDD, Hexagonal, Onion, Clean, CQRS, … How I put it all together<br>
 https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/
 
-Robert C Martin - Clean Archicture and Design
+Robert C Martin - Clean Archicture and Design<br>
 https://www.youtube.com/watch?v=Nsjsiz2A9mg
