@@ -28,8 +28,6 @@ O Presentation cuida da apresentação das telas e de como os elementos visuais 
 ## Melhorias
 
 Algumas melhorias para fazer na próxima versão do app:<br>
-- Trocar o scroll infinito.<br>
-- Trocar o controle DispatchSemaphore.<br>
 - Criar novas funcionalidades como: Detalhe de um repositório.<br>
 - Implementar testes unitários e de UI
 

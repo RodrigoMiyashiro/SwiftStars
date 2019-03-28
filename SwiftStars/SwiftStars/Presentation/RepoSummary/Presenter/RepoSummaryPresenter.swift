@@ -5,6 +5,7 @@
 //  Created by Rodrigo Miyashiro on 26/03/19.
 //  Copyright © 2019 Rodrigo Miyashiro. All rights reserved.
 //
+import UIKit
 
 class RepoSummaryPresenter {
     unowned let screen: RepoSummaryShowScreen
@@ -16,12 +17,13 @@ class RepoSummaryPresenter {
     }
 
     func retrieveRepositories(page: Int) {
-        do {
-            let repos = try self.executor.obtainDisplayableRepositories(page: page)
-
-            self.screen.displayRepositories(repos)
-        } catch {
-            self.screen.showErrorObtainingRepositories()
+        self.executor.obtainDisplayableRepositories(page: page) { (repos, error) in
+            if error != nil {
+                self.screen.showErrorObtainingRepositories()
+                return
+            }
+            
+            self.screen.displayRepositories(repos!)
         }
     }
 }

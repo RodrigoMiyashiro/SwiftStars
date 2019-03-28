@@ -14,20 +14,24 @@ class DefaultObtainRepositoriesExecutor: ObtainRepositoriesExecutor, Repositorie
     private var isSuccess = false
     private var obtainedRepositories: ListRepo?
     
-    func obtainDisplayableRepositories(page: Int) throws -> ListRepo {
+    func obtainDisplayableRepositories(page: Int, completion:@escaping(ListRepo?, Error?) -> Void) {
         let clientHTTP = DefaultHTTPClient()
         let provider = DefaultRepoProvider(client: clientHTTP)
         let obtainRepositories = ObtainRepositories(provider: provider, receiver: self)
         
-        obtainRepositories.execute(with: page)
-        
-        self.semaphoro.wait()
-        
-        guard let obtainedRepos = self.obtainedRepositories, self.isSuccess else {
-            throw ObtainRepositoriesExecutorError.errorObtainingRepositories
+        DispatchQueue.global().async {
+            obtainRepositories.execute(with: page)
+            self.semaphoro.wait()
+            
+            DispatchQueue.main.async {
+                if let obtainedRepos = self.obtainedRepositories, self.isSuccess {
+                    completion(obtainedRepos, nil)
+                }
+                else {
+                    completion(nil, ObtainRepositoriesExecutorError.errorObtainingRepositories)
+                }
+            }
         }
-        
-        return obtainedRepos
     }
     
     func receiveRepositories(_ listRepo: ListRepo?) {
