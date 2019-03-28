@@ -16,9 +16,14 @@ extension RepoSummaryViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     internal func initialize() {
+        self.startApplication()
         self.configureCustomTableView()
         self.configurateTitle()
         self.configureRefreshControl()
+    }
+    
+    private func startApplication() {
+        self.customView.startActivityIndicator()
     }
 
     private func configureCustomTableView() {

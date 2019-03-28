@@ -7,5 +7,5 @@
 //
 
 protocol ObtainRepositoriesExecutor: AnyObject {
-    func obtainDisplayableRepositories(page: Int) throws -> ListRepo
+    func obtainDisplayableRepositories(page: Int, completion:@escaping(ListRepo?, Error?) -> Void)
 }

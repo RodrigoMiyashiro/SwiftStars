@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import UIScrollView_InfiniteScroll
 
-private let initialPosition: Int = 0
+private let initialPosition: Int = 1
 
 class RepoSummaryViewController: UIViewController, HasCustomView, RepoSummaryShowScreen {
     internal var presenter: RepoSummaryPresenter?
     internal var listRepo: ListRepo?
-    internal var page: Int = initialPosition
+    private var page: Int = initialPosition
+    internal var currentPage: Int = initialPosition
     
     typealias CustomView = RepoSummaryTableView
     internal let refreshControl = UIRefreshControl()
@@ -28,18 +30,29 @@ class RepoSummaryViewController: UIViewController, HasCustomView, RepoSummarySho
 
         self.initialize()
         self.loadRepoInitalPage()
+        self.configureInfiniteScroll()
     }
     
     internal func loadRepoInitalPage() {
+        self.currentPage = initialPosition
         self.page = initialPosition
         self.loadRepos()
+    }
+    
+    internal func configureInfiniteScroll() {
+        self.customView.addInfiniteScroll { (tableView) in
+            if self.currentPage == self.page {
+                self.currentPage += 1
+                self.loadRepos()
+            }
+            
+            tableView.finishInfiniteScroll()
+        }
     }
     
     internal func loadRepos() {
         let executor = DefaultObtainRepositoriesExecutor()
         self.presenter = RepoSummaryPresenter(screen: self, executor: executor)
-        
-        self.customView.startActivityIndicator()
         
         self.presenter?.retrieveRepositories(page: self.page)
     }
@@ -47,9 +60,18 @@ class RepoSummaryViewController: UIViewController, HasCustomView, RepoSummarySho
     func displayRepositories(_ listRepo: ListRepo) {
         self.listRepo = self.mountListRepo(listRepo)
         
+        self.calculateCurrentPage()
         self.customView.reloadData()
         self.refreshControl.endRefreshing()
         self.customView.stopActivityIndicator()
+    }
+    
+    private func calculateCurrentPage() {
+        if self.currentPage == self.page {
+            self.currentPage += 1
+        }
+        
+        self.page = self.currentPage
     }
     
     private func mountListRepo(_ list: ListRepo) -> ListRepo? {
@@ -69,15 +91,5 @@ class RepoSummaryViewController: UIViewController, HasCustomView, RepoSummarySho
         print("🕵️‍♂️ Error...")
         self.refreshControl.endRefreshing()
         self.customView.stopActivityIndicator()
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            self.page += 1
-            self.loadRepos()
-        }
     }
 }
